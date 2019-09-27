@@ -2731,7 +2731,7 @@
         return FaceProcessor;
     }(NeuralNetwork));
 
-    var FACE_EXPRESSION_LABELS = ['neutral', 'happy', 'sad', 'angry', 'fearful', 'disgusted', 'surprised'];
+    var FACE_EXPRESSION_LABELS = ['neutral', 'happy', 'sad', 'angry', 'fearful', 'disgusted', 'surprised', 'left', 'right', 'up', 'down'];
     var FaceExpressions = /** @class */ (function () {
         function FaceExpressions(probabilities) {
             var _this = this;
@@ -2748,6 +2748,7 @@
                 .map(function (expression) { return ({ expression: expression, probability: _this[expression] }); })
                 .sort(function (e0, e1) { return e1.probability - e0.probability; });
         };
+        console.log(FaceExpressions);
         return FaceExpressions;
     }());
 
@@ -2831,6 +2832,7 @@
     }
 
     function drawFaceExpressions(canvasArg, faceExpressions, minConfidence, textFieldAnchor) {
+        //console.log(faceExpressions.expressions);
         if (minConfidence === void 0) { minConfidence = 0.1; }
         var faceExpressionsArray = Array.isArray(faceExpressions) ? faceExpressions : [faceExpressions];
         faceExpressionsArray.forEach(function (e) {

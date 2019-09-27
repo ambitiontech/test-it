@@ -30,7 +30,7 @@
           <option value="tiny_face_detector">Tiny Face Detector</option>
           <option value="mtcnn">MTCNN</option>
         </select>
-        <label>Select Face Detector</label>
+        <label>Select Face Detector22</label>
       </div>
       <!-- face_detector_selection_control -->
 
@@ -141,7 +141,7 @@
 
   <script>
     let forwardTimes = []
-    let withBoxes = true
+    let withBoxes = false
 
     function onChangeHideBoundingBoxes(e) {
       withBoxes = !$(e.target).prop('checked')
@@ -152,6 +152,47 @@
       const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
       $('#time').val(`${Math.round(avgTimeInMs)} ms`)
       $('#fps').val(`${faceapi.round(1000 / avgTimeInMs)}`)
+    }
+
+    function calculateRefLength(pointA, pointB){
+      const a = Math.abs(pointA.x - pointB.x)
+      const b = Math.abs(pointA.y - pointB.y)
+      return (Math.sqrt((a * a) + (b * b)))
+    }
+
+    function addDirectionsExpressions(refPoints, origExpressions) {
+      const LEFT_FACE_POINT_NUMBER = 1
+      const RIGHT_FACE_POINT_NUMBER = 15
+      const NOSE_POINT_NUMBER = 33
+      const TOP_NOSE_POINT_NUMBER = 27
+      const CHIN_POINT_NUMBER = 8
+      
+      const FACE_REF_POINTS_INDEXS = [LEFT_FACE_POINT_NUMBER,CHIN_POINT_NUMBER, RIGHT_FACE_POINT_NUMBER, TOP_NOSE_POINT_NUMBER, NOSE_POINT_NUMBER]
+
+      FACE_REF_POINTS_INDEXS.forEach(function(element){
+        console.log(refPoints[element]);
+      })
+
+      origExpressions.left = 0.0;
+      origExpressions.right = 0.0;
+      origExpressions.up = 0.0;
+      origExpressions.down = 0.0;
+
+      let _left = calculateRefLength(refPoints[LEFT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _right = calculateRefLength(refPoints[RIGHT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _up = calculateRefLength(refPoints[CHIN_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _down = calculateRefLength(refPoints[TOP_NOSE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+
+      // algo left-right
+      if((_left > _right) && ((_right / _left) < 0.9)){ // taux d'identification de direction horizontal
+        origExpressions.left = -((0.5/0.9)*(_right/_left)) + 1;
+      }
+
+      if((_right > _left) && ((_left / _right) < 0.9)){
+        origExpressions.right = -((0.5/0.9)*(_left/_right)) + 1;
+      }
+
+      return origExpressions;
     }
 
     async function onPlay() {
@@ -165,7 +206,9 @@
 
       const ts = Date.now()
 
-      const result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions()
+      const result = await faceapi.detectSingleFace(videoEl, options).withFaceLandmarks().withFaceExpressions()
+
+      //console.log('test detection')
 
       updateTimeStats(Date.now() - ts)
 
@@ -174,6 +217,93 @@
         const dims = faceapi.matchDimensions(canvas, videoEl, true)
 
         const resizedResult = faceapi.resizeResults(result, dims)
+
+        // todo : récuperer les coordonnéesdes 5 points calculer les distance et prédire la direction du visage.
+        // Problématique de la prédiction verticale -> angle caméra -> topographie du visage -> init coordonnées de départ.
+        // Surcharge du rapport -> quantification : gauche, droite, haute, bas, en probabilités.
+        /**
+         *            27
+         *
+         *      1     33      RIGHT_FACE_POINT_NUMBER
+         *
+         *            8
+         */
+
+
+        let faceRefPoint = {
+          pointNumber : null,
+          x : null,
+          y : null,
+        }
+
+        /**
+        faceRefPoint.pointNumber = 5
+        faceRefPoint.x = 2
+        faceRefPoint.y = 2
+
+        faceRefPoint.u = 4
+
+        console.log(' surcharge obj ', faceRefPoint)
+        */
+
+        let faceRefPoints = []
+
+
+        //console.log(Array.from(resizedResult.unshiftedLandmarks.positions))
+
+
+        resizedResult.unshiftedLandmarks.positions.forEach(function(element, idx) {
+          //console.log('ele : ' + element._x);
+          var _faceRefPoint = {
+            pointNumber : idx,
+            x : element._x,
+            y : element._y,
+          }
+
+          //if(faceRefPointsIndexs.indexOf(idx) !== -1)
+            faceRefPoints.push(_faceRefPoint)
+        })
+
+        //console.log('dd -> ' + faceRefPoints[33])
+
+        console.log(faceRefPoints);
+
+        /**
+        faceRefPoints['1'] = resizedResult.unshiftedLandmarks.positions.indexOf(1)
+        faceRefPoints['8'] = resizedResult.unshiftedLandmarks.positions.indexOf(8)
+        faceRefPoints['RIGHT_FACE_POINT_NUMBER'] = resizedResult.unshiftedLandmarks.positions.indexOf(RIGHT_FACE_POINT_NUMBER)
+        faceRefPoints['27'] = resizedResult.unshiftedLandmarks.positions.indexOf(27)
+        faceRefPoints['33'] = resizedResult.unshiftedLandmarks.positions.indexOf(33)
+        */
+
+
+
+        //consol.log('rr' + resizedResult.unshiftedLandmarks.positions.indexOf(33))
+
+        /**
+        console.log('positions' + resizedResult.unshiftedLandmarks);
+        console.log('faceRefPointsIndexs.length' + faceRefPointsIndexs.length);
+
+
+        let i = 0;
+        faceRefPointsIndexs.forEach(function(element) {
+          i ++
+          //console.log(element);
+          //index =>
+          //faceRefPoints[element] = resizedResult.unshiftedLandmarks.positions[element]
+        })
+
+        console.log('i : '+i);
+         */
+
+        //resizedResult.unshiftedLandmarks.positions[1]
+
+        //console.log('faceRefPoints.length' + faceRefPoints.length);
+        //console.log('beforre',resizedResult.expressions);
+
+
+        resizedResult.expressions = addDirectionsExpressions(faceRefPoints, resizedResult.expressions)
+
         const minConfidence = 0.05
         if (withBoxes) {
           faceapi.draw.drawDetections(canvas, resizedResult)
@@ -187,6 +317,7 @@
     async function run() {
       // load face detection and face expression recognition models
       await changeFaceDetector(TINY_FACE_DETECTOR)
+      await faceapi.loadFaceLandmarkModel('/')
       await faceapi.loadFaceExpressionModel('/')
       changeInputSize(224)
 
