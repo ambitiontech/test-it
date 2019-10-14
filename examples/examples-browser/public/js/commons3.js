@@ -65,10 +65,6 @@ function renderNavBar(navbarId, exampleUri) {
       name: 'Webcam Face Expression Recognition'
     },
     {
-      uri: 'webcam_face_expression_recognition3',
-      name: 'Webcam Face Expression Recognition3'
-    },
-    {
       uri: 'webcam_age_and_gender_recognition',
       name: 'Webcam Age and Gender Recognition'
     },
@@ -98,10 +94,9 @@ function renderNavBar(navbarId, exampleUri) {
     }
   ]
 
-  //const navbar = $(navbarId).get(0)
+  const navbar = $(navbarId).get(0)
   const pageContainer = $('.page-container').get(0)
 
-  /**
   const header = document.createElement('h3')
   header.innerHTML = examples.find(ex => ex.uri === exampleUri).name
   pageContainer.insertBefore(header, pageContainer.children[0])
@@ -154,7 +149,6 @@ function renderNavBar(navbarId, exampleUri) {
   $('.button-collapse').sideNav({
     menuWidth: 260
   })
-   */
 }
 
 function renderSelectList(selectListId, onChange, initialValue, renderChildren) {

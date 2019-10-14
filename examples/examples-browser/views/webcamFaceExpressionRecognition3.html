@@ -1,16 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <script src="face-api.js"></script>
   <script src="js/commons.js"></script>
   <script src="js/faceDetectionControls.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <!--link rel="stylesheet" href="../public/styles-maquette2.css"-->
+  <link rel="stylesheet" href="styles-maquette2.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
-  <div id="navbar"></div>
+  <!--div class="container-fluid min-100">
+    <div class="flex_container">
+      <div class="flex_item_left">
+        .....
+      </div>
+      <div class="flex_item_right">
+        .....
+      </div>
+      <div>
+  </div-->
+
+  <div class="container1 min-100">
+    <div class="row">
+      <div class="flex-container">
+        <div class="test-container">
+          test block
+
+        </div>
+        <div class="analyze-container">
+          <div class="analyze-container--webcam-wrapper">
+            <!--webcam block-->
+            <div class="margin">
+              <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+              <canvas id="overlay" class="video-canvas"/>
+            </div>
+          </div>
+          <div class="analyze-container--sound-wrapper">
+            sound block
+          </div>
+          <div class="analyze-container--chatbot-wrapper">
+            chatbot block
+          </div>
+          <div class="analyze-container--nav-wrapper">
+            navigation block <br/><br/>
+            <div class="container-fluid">
+              <div class="row no-margin">
+                <div class="col-6 no-margin"><button class="btn btn-primary btn-block">Bouton 1</button></div>
+                <div class="col-6 no-margin"><button class="btn btn-primary btn-block">Bouton 2</button></div>
+              </div>
+              <div class="row">
+                <div class="col-12 no-margin"><button class="btn btn-primary btn-block">Bouton 3</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--div id="navbar"></div>
   <div class="center-content page-container">
 
     <div class="progress" id="loader">
@@ -21,42 +77,41 @@
       <canvas id="overlay" />
     </div>
 
-    <div class="row side-by-side">
+    <div class="row side-by-side"-->
 
       <!-- face_detector_selection_control -->
-      <div id="face_detector_selection_control" class="row input-field" style="margin-right: 20px;">
+      <!--div id="face_detector_selection_control" class="row input-field" style="margin-right: 20px;">
         <select id="selectFaceDetector">
           <option value="ssd_mobilenetv1">SSD Mobilenet V1</option>
           <option value="tiny_face_detector">Tiny Face Detector</option>
           <option value="mtcnn">MTCNN</option>
         </select>
-        <label>Select Face Detector22</label>
+        <label>Select Face Detector22</label>--
       </div>
       <!-- face_detector_selection_control -->
 
       <!-- check boxes -->
-      <div class="row" style="width: 220px;">
+      <!--div class="row" style="width: 220px;">
         <input type="checkbox" id="hideBoundingBoxesCheckbox" onchange="onChangeHideBoundingBoxes(event)" />
         <label for="hideBoundingBoxesCheckbox">Hide Bounding Boxes</label>
-      </div>
+      </div-->
       <!-- check boxes -->
 
       <!-- fps_meter -->
-      <div id="fps_meter" class="row side-by-side">
+      <!--div id="fps_meter" class="row side-by-side">
         <div>
           <label for="time">Time:</label>
           <input disabled value="-" id="time" type="text" class="bold">
           <label for="fps">Estimated Fps:</label>
           <input disabled value="-" id="fps" type="text" class="bold">
         </div>
-      </div>
+      </div-->
       <!-- fps_meter -->
 
-    </div>
-
+    <!--/div-->
 
     <!-- ssd_mobilenetv1_controls -->
-    <span id="ssd_mobilenetv1_controls">
+    <!--span id="ssd_mobilenetv1_controls">
       <div class="row side-by-side">
         <div class="row">
           <label for="minConfidence">Min Confidence:</label>
@@ -75,11 +130,11 @@
           <i class="material-icons left">+</i>
         </button>
       </div>
-    </span>
+    </span-->
     <!-- ssd_mobilenetv1_controls -->
 
     <!-- tiny_face_detector_controls -->
-    <span id="tiny_face_detector_controls">
+    <!--span id="tiny_face_detector_controls">
       <div class="row side-by-side">
         <div class="row input-field" style="margin-right: 20px;">
           <select id="inputSize">
@@ -111,11 +166,11 @@
           <i class="material-icons left">+</i>
         </button>
       </div>
-    </span>
+    </span-->
     <!-- tiny_face_detector_controls -->
 
     <!-- mtcnn_controls -->
-    <span id="mtcnn_controls">
+    <!--span id="mtcnn_controls">
       <div class="row side-by-side">
         <div class="row">
           <label for="minFaceSize">Minimum Face Size:</label>
@@ -134,12 +189,18 @@
           <i class="material-icons left">+</i>
         </button>
       </div>
-    </span>
+    </span-->
     <!-- mtcnn_controls -->
 
-  </body>
+  <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script-->
+
+</body>
+
 
   <script>
+
     let forwardTimes = []
     let withBoxes = false
 
@@ -198,6 +259,47 @@
       alert("Same instance? " + (instance1 === instance2));
     }
 
+    function chatBotLog(expressions) {
+      const chatBot = $('.analyze-container--chatbot-wrapper').get(0);
+
+      let result = 'block chatbot<br/><br/>';
+
+      let expressionArray = Object.keys(expressions);
+
+      expressionArray.map(function(element) {
+        if(expressions[element] > 0.5){
+          result += element + ": " + expressions[element] + "<br/>";
+        }
+      });
+
+      chatBot.innerHTML = result;
+
+      /*
+      const object1 = {
+        a: 'somestring',
+        b: 42,
+        c: false
+      };
+
+      console.log(Object.keys(object1));
+// expected output: Array ["a", "b", "c"]
+      */
+
+
+
+      /**
+      var nombres = [1, 4, 9];
+      var doubles = nombres.map(function(num) {
+        return num * 2;
+      });
+      */
+
+      /**
+      expressions.map(function(element) {
+        console.log(element);
+      });
+       */
+    }
 
     function addDirectionsExpressions(refPoints, origExpressions) {
       const LEFT_FACE_POINT_NUMBER = 1
@@ -212,6 +314,14 @@
 
       /** vertical params **/
 
+      //init all expressions
+      origExpressions.angry = 0.0;
+      origExpressions.disgusted = 0.0;
+      origExpressions.fearful = 0.0;
+      origExpressions.happy = 0.0;
+      origExpressions.neutral = 0.0;
+      origExpressions.sad = 0.0;
+      origExpressions.surprised = 0.0;
 
       origExpressions.left = 0.0;
       origExpressions.right = 0.0;
@@ -260,6 +370,8 @@
       //console.log('test detection')
 
       updateTimeStats(Date.now() - ts)
+
+      //$result = false;
 
       if (result) {
         const canvas = $('#overlay').get(0)
@@ -315,7 +427,7 @@
 
         //console.log('dd -> ' + faceRefPoints[33])
 
-        console.log(faceRefPoints);
+        //************************************************************console.log(faceRefPoints);
 
         /**
         faceRefPoints['1'] = resizedResult.unshiftedLandmarks.positions.indexOf(1)
@@ -353,12 +465,17 @@
 
         resizedResult.expressions = addDirectionsExpressions(faceRefPoints, resizedResult.expressions)
 
+        //console.log(resizedResult.expressions);
+        chatBotLog(resizedResult.expressions);
+
         const minConfidence = 0.05
         if (withBoxes) {
           faceapi.draw.drawDetections(canvas, resizedResult)
         }
-        faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence)
+        //faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence)   avec proba
       }
+
+
 
       setTimeout(() => onPlay())
     }
@@ -372,17 +489,44 @@
 
       // try to access users webcam and stream the images
       // to the video element
+
+
+      /**
       const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      audio: true,
+        video: {
+        width: { min: 1280 },
+        height: { min: 720 }
+      }
+       */
+      var constraints = {
+        audio: true,
+        video: {
+          width: { min: 260, ideal: 288, max: 288 },
+          height: { min: 190, ideal: 220, max: 230 }
+        }
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
       const videoEl = $('#inputVideo').get(0)
       videoEl.srcObject = stream
     }
 
     function updateResults() {}
 
+    /**
+    function resizeVideo() {
+      const canvas = $('#overlay').get(0)
+      //document.getElementById("myBtn").style.width = "300px";
+      canvas.style.width = "280px";
+    }
+     */
+
     $(document).ready(function() {
-      renderNavBar('#navbar', 'webcam_face_expression_recognition')
+      //renderNavBar('#navbar', 'webcam_face_expression_recognition3')
       initFaceDetectionControls()
       run()
+      //resizeVideo()
     })
   </script>
 </body>

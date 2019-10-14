@@ -1,0 +1,137 @@
+html, body {
+  height: 100%;
+}
+
+.min-100 {
+  min-height: 100%;
+  background-color: aqua;
+}
+
+.row.row-height {
+  height: 100vh;
+  margin: 0;
+}
+
+.test-container {
+  background-color: darkkhaki;
+  flex: 1;
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+}
+
+.analyze-container {
+  display: flex;
+  flex-direction: column;
+
+  /*justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;*/
+  width: 300px;
+  background-color: gold;
+  height: 900px;
+  /*padding: 20px;*/
+  /*background-color: rebeccapurple;*/
+}
+
+.analyze-container--webcam-wrapper {
+  background-color: darkorange;
+  height: 270px; /*a cause du padding*/
+}
+
+.analyze-container--sound-wrapper {
+  background-color: darkgreen;
+  height: 100px;
+}
+
+.analyze-container--chatbot-wrapper {
+  background-color: hotpink;
+  height: 100px;
+}
+
+.analyze-container--nav-wrapper {
+  background-color: lightseagreen;
+  height: 150px;
+}
+
+/**
+.page-container {
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 20px;
+  padding-left: 280px;
+  display: inline-flex !important;
+}
+
+@media only screen and (max-width : 992px) {
+  .page-container {
+    padding-left: 0;
+    display: flex !important;
+  }
+}
+
+#navbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.side-by-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.side-by-side >* {
+  margin: 0 5px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.margin-sm {
+  margin: 5px;
+}
+
+.margin {
+  margin: 20px;
+}
+
+.button-sm {
+  padding: 0 10px !important;
+}
+
+.pad-sides-sm {
+  padding: 0 8px !important;
+}
+
+#github-link {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+
+#overlay, .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#facesContainer canvas {
+  margin: 10px;
+}
+
+ */
