@@ -93,6 +93,7 @@ video {
 .analyze-container--chatbot-wrapper {
   background-color: hotpink;
   background-color: lightgrey;
+  background-color: white;
   border: 1px solid black;
   border-collapse: collapse;
   margin: 5px;
@@ -102,6 +103,7 @@ video {
 .analyze-container--nav-wrapper {
   background-color: lightseagreen;
   background-color: lightgrey;
+  background-color: white;
   border: 1px solid black;
   border-collapse: collapse;
   margin: 5px;

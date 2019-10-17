@@ -31,8 +31,7 @@
     <div class="row">
       <div class="flex-container">
         <div class="test-container">
-          test block
-
+          <img src="../../test.png" height="100%" width="100%"/>
         </div>
         <div class="analyze-container">
           <div class="analyze-container--webcam-wrapper">
@@ -43,14 +42,17 @@
             </div>
           </div>
           <div class="analyze-container--sound-wrapper">
-            sound block
+            <img data-image-id="1*0CplbBX6gsV-6qV-dBYcnw.gif" data-width="280" data-height="40" data-action="zoom"
+                 data-action-value="1*0CplbBX6gsV-6qV-dBYcnw.gif" src="https://hackernoon.com/hn-images/1*0CplbBX6gsV-6qV-dBYcnw.gif" width="288" height="98">
           </div>
           <div class="analyze-container--chatbot-wrapper">
-            chatbot block
+            <img src="https://cdn3.iconfinder.com/data/icons/chat-bot-emoji-blue-filled-color/300/14134081Untitled-3-512.png" width="60px"/>
+            <div class="mouvement-logger">
+
+            </div>
           </div>
           <div class="analyze-container--nav-wrapper">
-            navigation block <br/><br/>
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top: 20px;">
               <div class="row no-margin">
                 <div class="col-6 no-margin"><button class="btn btn-primary btn-block">Bouton 1</button></div>
                 <div class="col-6 no-margin"><button class="btn btn-primary btn-block">Bouton 2</button></div>
@@ -191,11 +193,16 @@
       </div>
     </span-->
     <!-- mtcnn_controls -->
-
-  <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!--
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  -->
 </body>
 
 
@@ -260,9 +267,9 @@
     }
 
     function chatBotLog(expressions) {
-      const chatBot = $('.analyze-container--chatbot-wrapper').get(0);
+      const chatBot = $('.mouvement-logger').get(0);
 
-      let result = 'block chatbot<br/><br/>';
+      let result = '';
 
       let expressionArray = Object.keys(expressions);
 
@@ -507,7 +514,7 @@
         }
       }
 
-      //const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
       const videoEl = $('#inputVideo').get(0)
       videoEl.srcObject = stream
     }
