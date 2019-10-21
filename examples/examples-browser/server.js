@@ -1,9 +1,9 @@
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
-const privateKey  = fs.readFileSync('sslcert/my.key', 'utf8');
-const certificate = fs.readFileSync('sslcert/my.crt', 'utf8');
 
+const privateKey  = fs.readFileSync('key.pem');
+const certificate = fs.readFileSync('cert.pem');
 const credentials = {key: privateKey, cert: certificate};
 
 const express = require('express')
@@ -60,12 +60,8 @@ app.post('/fetch_external_image', async (req, res) => {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
-console.log('Listening on port 3000!');
-
-httpServer.listen(3000);
-httpsServer.listen(3300);
-
-//app.listen(3000, () => console.log('Listening on port 3000!'))
+httpServer.listen(3000, () => console.log('Listen on port 3000 for http'));
+httpsServer.listen(3300, () => console.log('Lesten on port 3300 for hhtps'));
 
 function request(url, returnBuffer = true, timeout = 10000) {
   return new Promise(function(resolve, reject) {
