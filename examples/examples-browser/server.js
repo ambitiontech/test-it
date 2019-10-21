@@ -60,8 +60,8 @@ app.post('/fetch_external_image', async (req, res) => {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(3000, () => console.log('Listen on port 3000 for http'));
-httpsServer.listen(3300, () => console.log('Lesten on port 3300 for hhtps'));
+httpServer.listen(3000, () => console.log('Listening on port 3000 for http'));
+httpsServer.listen(3300, () => console.log('Listening on port 3300 for https'));
 
 function request(url, returnBuffer = true, timeout = 10000) {
   return new Promise(function(resolve, reject) {
