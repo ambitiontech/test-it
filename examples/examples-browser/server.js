@@ -1,10 +1,14 @@
-const fs = require('fs');
-const http = require('http');
-const https = require('https');
+require('dotenv').config();
 
-const privateKey  = fs.readFileSync('key.pem');
-const certificate = fs.readFileSync('cert.pem');
-const credentials = {key: privateKey, cert: certificate};
+if(process.env.env === 'integ') {
+  var fs = require('fs');
+  var http = require('http');
+  var https = require('https');
+
+  var privateKey = fs.readFileSync('key.pem');
+  var certificate = fs.readFileSync('cert.pem');
+  var credentials = {key: privateKey, cert: certificate};
+}
 
 const express = require('express')
 const path = require('path')
@@ -57,11 +61,15 @@ app.post('/fetch_external_image', async (req, res) => {
   }
 })
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
+if(process.env.env === 'local'){
+  app.listen(4000, () => console.log('Listening on port 4000 for http'));
+}else{
+  const httpServer = http.createServer(app);
+  const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(3000, () => console.log('Listening on port 3000 for http'));
-httpsServer.listen(3300, () => console.log('Listening on port 3300 for https'));
+  httpServer.listen(3000, () => console.log('Listening on port 3000 for http'));
+  httpsServer.listen(3300, () => console.log('Listening on port 3300 for https'));
+}
 
 function request(url, returnBuffer = true, timeout = 10000) {
   return new Promise(function(resolve, reject) {

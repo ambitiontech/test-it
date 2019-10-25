@@ -336,10 +336,10 @@
       origExpressions.up = 0.0;
       origExpressions.down = 0.0;
 
-      let _left = calculateRefLength(refPoints[LEFT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
-      let _right = calculateRefLength(refPoints[RIGHT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
-      let _up = calculateRefLength(refPoints[CHIN_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
-      let _down = calculateRefLength(refPoints[TOP_NOSE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _left =   calculateRefLength(refPoints[LEFT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _right =  calculateRefLength(refPoints[RIGHT_FACE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _down =    calculateRefLength(refPoints[CHIN_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
+      let _up =     calculateRefLength(refPoints[TOP_NOSE_POINT_NUMBER], refPoints[NOSE_POINT_NUMBER]);
 
       /** algo left-right **/
       if((_left > _right) && ((_right / _left) < HORIZONTAL_ROTATION_AVR)){
@@ -351,13 +351,39 @@
       }
 
       /** algo up down **/
-      let vertcalRate = (_up > _down) ?  (_down/_up) : (_up/_down);
-      let valideVerticalRate = (vertcalRate > 0.45 && vertcalRate < 0.45);
+      // on part de la supposition que le _up > toujours plus gros que le down et que le rate est de 0.45 -> à ameliorer
 
+
+      console.log('down/up rate '+(_down/_up));
+
+      /**
+      let vertcalRate = 0.0;
+      if(_up > _down) {
+        vertcalRate = (_down/_up);
+        let valideVerticalRate = (vertcalRate < 0.45); //baisse la tête
+        if(valideVerticalRate){
+
+        }
+      }else{
+        vertcalRate = ((_up/_down));
+        let valideVerticalRate = (vertcalRate < 0.45); //leve la tête
+        if(valideVerticalRate){
+
+        }
+      }
+
+      */
+
+
+
+      //let vertcalRate = (_up > _down) ?  (_down/_up) : (_up/_down);           // ~ 0.45 -> todo get the vertical rate in our case it's fixed
+      //let valideVerticalRate = (vertcalRate > 0.45 && vertcalRate < 0.45);
+
+      /**
       if(valideVerticalRate) {
 
       }
-
+      */
 
       return origExpressions;
     }
@@ -393,7 +419,7 @@
         /**
          *            27
          *
-         *      1     33      RIGHT_FACE_POINT_NUMBER
+         *      1     33      15
          *
          *            8
          */
